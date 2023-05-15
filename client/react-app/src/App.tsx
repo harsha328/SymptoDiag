@@ -5,6 +5,7 @@ import Result from "./pages/Result";
 import UserLogin from "./pages/UserLogin";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Diseases from "./pages/Diseases";
 
 interface User {
   userid:string;
@@ -59,7 +60,8 @@ function App() {
   const resultState= {about:"adsjadkasd",
   tests:"ajdsksadnkans",
   remedies:"aiusdhsadjj"}
-
+  const disease1="covid";
+  const disease2="common cold"
 
   return (
     <Router>
@@ -86,6 +88,12 @@ function App() {
           element={
             <Result result={resultState}/>
           }
+        ></Route>
+        <Route
+        path="/Diseases"
+        element={
+         <Diseases disease1={disease1} disease2={disease2}/>
+        }
         ></Route>
       </Routes>
     </Router>

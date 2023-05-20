@@ -57,11 +57,11 @@ function App() {
     console.log(users)
   }, [users]);
 
-  const resultState= {about:"adsjadkasd",
-  tests:"ajdsksadnkans",
-  remedies:"aiusdhsadjj"}
-  const disease1="covid";
-  const disease2="common cold"
+  const resultState= {about:"About the diseasse in detail",
+  tests:"What are the tests possible",
+  remedies:"Remedies to reduce the disease"}
+  const disease1="DISEASE-1";
+  const disease2="DISEASE-2"
 
   return (
     <Router>

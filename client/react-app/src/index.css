@@ -10,5 +10,11 @@
   all:inherit;
 }
 .c-grey{
-  background-color:grey;
+  background-color:rgb(128, 128, 128);
+}
+.diseasecard{
+  
+  
+  background-color: rgb(227, 248, 248);
+
 }

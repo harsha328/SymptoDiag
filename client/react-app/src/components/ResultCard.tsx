@@ -10,11 +10,9 @@ function ResultCard({Diseasename,Strenth,link= "#"}:Props)
 
 {
     return(
-        <div className="card text-center">
-  <div className="card-header">
-    
-  </div>
-  <div className="card-body">
+        <div className="card text-center  mt-5" >
+ 
+  <div className="card-body diseasecard">
     <h5 className="card-title">{Diseasename}</h5>
     <p className="card-text">{Strenth}</p>
 
@@ -28,8 +26,7 @@ function ResultCard({Diseasename,Strenth,link= "#"}:Props)
 
 
   </div>
-  <div className="card-footer text-body-secondary">
-  </div>
+  
 </div>
     )
 }

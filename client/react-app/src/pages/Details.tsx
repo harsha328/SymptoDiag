@@ -23,7 +23,7 @@ function Details({  setState }: Props) {
           <h2 className="py-5"> Welcome </h2>
           <SingleInput
             text="Age"
-            placeholder="Ex. 12, 24 ..."
+            placeholder=""
             handleInput={(e) => {
               setInputState(e.target.value);
             }}
@@ -32,22 +32,22 @@ function Details({  setState }: Props) {
         <div className="container">
           <h4 className="pt-5">Sex:</h4>
           <DoubleButton
-            text1="male"
-            text2="female"
+            text1="Male"
+            text2="Female"
             handleOptionClick={(e) => {
               setRadioState(e.target.value);
             }}
           ></DoubleButton>
         </div>
         <ButtonGroup
-          text="continue"
+          text="CONTINUE"
           link="../symptoms"
           onSubmit={() => {
             setState( inputState,  radioState );
           }}
         ></ButtonGroup>
         <ButtonGroup
-          text="back"
+          text="BACK"
           link="/"
           onSubmit={() => {
             setState('','');

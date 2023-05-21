@@ -2,7 +2,6 @@ import NavBar from "../components/NavBar";
 import { Accordion } from "react-bootstrap";
 import {useState,useEffect} from 'react';
 import ButtonGroup from "../components/ButtonGroup";
-import axios from "axios";
 // interface ResultText{
 //     about:string;
 //     tests:string;

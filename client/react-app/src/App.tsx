@@ -14,11 +14,7 @@ interface User {
   gender: string;
   symptoms: string;
 }
-interface ResultObject{
-  about:string;
-  tests:string;
-  remedies:string;
-}
+
 function App() {
   const [users, setUsers] = useState<User[]>([]);
   const [disease,setDisease]=useState<string[]>([]);
@@ -63,13 +59,17 @@ function App() {
     }
     console.log(users)
   }, [users]);
-
+  const disease1=disease[0];
+  const disease2=disease[1];
   useEffect(() => {
     axios.get("http://localhost:3002/diseases").then((response) => {
         const data=response.data;
         const resultObject: string[][]=[]
         data.forEach((val: any)=>{
-          resultObject.push([val.disease_name,val.tests,val.remedies])
+          if(val.disease_name==disease1 || val.disease_name==disease2){
+
+            resultObject.push([val.disease_name,val.tests,val.remedies])
+          }
         })
         setResultState(resultObject)
       })
@@ -77,8 +77,7 @@ function App() {
   , [] as string[]);
 
   
-  const disease1=disease[0];
-  const disease2=disease[1];
+  
 
   return (
     <Router>

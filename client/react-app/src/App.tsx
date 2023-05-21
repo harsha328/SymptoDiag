@@ -14,10 +14,16 @@ interface User {
   gender: string;
   symptoms: string;
 }
-
+interface ResultObject{
+  about:string;
+  tests:string;
+  remedies:string;
+}
 function App() {
   const [users, setUsers] = useState<User[]>([]);
   const [disease,setDisease]=useState<string[]>([]);
+  const [resultState,setResultState]= useState<string[][]>([])
+
   const [userdata, setUserData] = useState<User>({
     userid:"are",
     username:"",
@@ -58,9 +64,19 @@ function App() {
     console.log(users)
   }, [users]);
 
-  const resultState= {about:"About the diseasse in detail",
-  tests:"What are the tests possible",
-  remedies:"Remedies to reduce the disease"}
+  useEffect(() => {
+    axios.get("http://localhost:3002/diseases").then((response) => {
+        const data=response.data;
+        const resultObject: string[][]=[]
+        data.forEach((val: any)=>{
+          resultObject.push([val.disease_name,val.tests,val.remedies])
+        })
+        setResultState(resultObject)
+      })
+    }
+  , [] as string[]);
+
+  
   const disease1=disease[0];
   const disease2=disease[1];
 

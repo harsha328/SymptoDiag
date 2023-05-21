@@ -17,10 +17,10 @@ function UserLogin({ setState }: Props) {
     <>
       <NavBar />
       <div className="container">
-        <h2 className="py-5"> Login Now! </h2>
+        <h2 className="py-5"> Forgot Password! </h2>
         <div className="container py-4">
         <SingleInput
-          text="Enter your id"
+          text="Enter your Mobile number"
           
           placeholder="Ex. john..."
           handleInput={(e) => {
@@ -30,20 +30,20 @@ function UserLogin({ setState }: Props) {
         </div>
         <div className="container py-4">
         <SingleInput
-          text="Enter your password"
-          placeholder=" "
+          text="Send OTP"
+          placeholder="Enter OTP"
           handleInput={(e) => {
             setUserName(e.target.value);
           }}
           
         />
-        <a className="py-5">Forgot password ?</a>
+        
         </div>
 
       </div>
       <ButtonGroup
-        text="login"
-        link="../Details"
+        text="submit"
+        link="../UserLogin"
         onSubmit={() => {
             const id=uid(userName);
             console.log(id)
@@ -53,7 +53,7 @@ function UserLogin({ setState }: Props) {
       ></ButtonGroup>
       <ButtonGroup
         text="back"
-        link=" "
+        link="../UserLogin"
         onSubmit={() => {
             const id=uid(userName);
             console.log(id)

@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Diseases from "./pages/Diseases";
 
+
 interface User {
   userid:string;
   username:string;
@@ -95,6 +96,14 @@ function App() {
          <Diseases disease1={disease1} disease2={disease2}/>
         }
         ></Route>
+        <Route
+        path="/ForgotPwd"
+        element={
+          <UserLogin state={userdata}  setState={handleUserIdChange}/>
+        }
+        ></Route>
+        
+
       </Routes>
     </Router>
   );

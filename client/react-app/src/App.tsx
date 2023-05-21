@@ -17,6 +17,7 @@ interface User {
 
 function App() {
   const [users, setUsers] = useState<User[]>([]);
+  const [disease,setDisease]=useState<string[]>([]);
   const [userdata, setUserData] = useState<User>({
     userid:"are",
     username:"",
@@ -60,8 +61,8 @@ function App() {
   const resultState= {about:"About the diseasse in detail",
   tests:"What are the tests possible",
   remedies:"Remedies to reduce the disease"}
-  const disease1="DISEASE-1";
-  const disease2="DISEASE-2"
+  const disease1=disease[0];
+  const disease2=disease[1];
 
   return (
     <Router>
@@ -80,7 +81,7 @@ function App() {
         <Route
           path="/Symptoms"
           element={
-            <Symptoms state={userdata} setState={handleSymptomsChange} />
+            <Symptoms state={userdata} setState={handleSymptomsChange} setDisease={setDisease} />
           }
         ></Route>
         <Route

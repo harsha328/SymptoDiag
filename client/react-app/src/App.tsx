@@ -69,12 +69,13 @@ function App() {
           if(val.disease_name==disease1 || val.disease_name==disease2){
 
             resultObject.push([val.disease_name,val.tests,val.remedies])
+            console.log(val)
           }
         })
         setResultState(resultObject)
       })
     }
-  , [] as string[]);
+  , [] );
 
   
   
@@ -100,9 +101,15 @@ function App() {
           }
         ></Route>
         <Route
-          path="/Result"
+          path="/Result1"
           element={
-            <Result result={resultState}/>
+            <Result result={resultState} disease={disease1} />
+          }
+        ></Route>
+        <Route
+          path="/Result2"
+          element={
+            <Result result={resultState} disease={disease2} />
           }
         ></Route>
         <Route

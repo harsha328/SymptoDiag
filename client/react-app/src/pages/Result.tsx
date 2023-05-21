@@ -2,6 +2,7 @@ import NavBar from "../components/NavBar";
 import { Accordion } from "react-bootstrap";
 import {useState,useEffect} from 'react';
 import ButtonGroup from "../components/ButtonGroup";
+import axios from "axios"
 // interface ResultText{
 //     about:string;
 //     tests:string;
@@ -9,10 +10,13 @@ import ButtonGroup from "../components/ButtonGroup";
 // }
 interface Props{
     result:string[][];
+    disease:string;
 }
 
 
-function Result({result}:Props) {
+function Result({result,disease}:Props) {
+  const [resultState,setResultState]= useState<string[][]>([])
+
 
   const [resultText,setResultText] =useState<string[][]>([])
   useEffect(()=>{
@@ -20,7 +24,22 @@ function Result({result}:Props) {
 
   },[resultText])
 
-  
+  useEffect(() => {
+    axios.get("http://localhost:3002/diseases").then((response) => {
+        const data=response.data;
+        const resultObject: string[][]=[]
+        data.forEach((val: any)=>{
+          if(val.disease_name==disease){
+
+            resultObject.push([val.disease_name,val.tests,val.remedies])
+            console.log(resultState)
+
+          }
+        })
+        setResultState(resultObject)
+      })
+    }
+  , [] );
   return (
     <>
       <NavBar />

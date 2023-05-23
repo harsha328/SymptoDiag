@@ -9,29 +9,30 @@ import axios from "axios"
 //     remedies:string;
 // }
 interface Props{
-    result:string[][];
+    //result:string[][];
     disease:string;
 }
 
 
-function Result({result,disease}:Props) {
+function Result({disease}:Props) {
   const [resultState,setResultState]= useState<string[][]>([])
 
 
-  const [resultText,setResultText] =useState<string[][]>([])
-  useEffect(()=>{
-    setResultText(result)
+  // const [resultText,setResultText] =useState<string[][]>([])
+  // useEffect(()=>{
+  //   setResultText(result)
 
-  },[resultText])
+  // },[resultText])
 
   useEffect(() => {
     axios.get("http://localhost:3002/diseases").then((response) => {
         const data=response.data;
         const resultObject: string[][]=[]
+        console.log(data)
         data.forEach((val: any)=>{
           if(val.disease_name==disease){
 
-            resultObject.push([val.disease_name,val.tests,val.remedies])
+            resultObject.push(val.disease_name,val.tests,val.remedies)
             console.log(resultState)
 
           }
@@ -47,15 +48,15 @@ function Result({result,disease}:Props) {
         <Accordion className="my-4">
           <Accordion.Item eventKey="0">
             <Accordion.Header>About</Accordion.Header>
-            <Accordion.Body>{resultText[0]}</Accordion.Body>
+            <Accordion.Body>{resultState[0]}</Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="1">
             <Accordion.Header>Tests Possible</Accordion.Header>
-            <Accordion.Body>{resultText[1]}</Accordion.Body>
+            <Accordion.Body>{resultState[1]}</Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="2">
             <Accordion.Header>Your Remedies</Accordion.Header>
-            <Accordion.Body>{resultText[2]}</Accordion.Body>
+            <Accordion.Body>{resultState[2]}</Accordion.Body>
           </Accordion.Item>
         </Accordion>
       </div>

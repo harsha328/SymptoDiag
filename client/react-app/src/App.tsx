@@ -18,7 +18,6 @@ interface User {
 function App() {
   const [users, setUsers] = useState<User[]>([]);
   const [disease,setDisease]=useState<string[]>([]);
-  const [resultState,setResultState]= useState<string[][]>([])
 
   const [userdata, setUserData] = useState<User>({
     userid:"are",
@@ -61,24 +60,7 @@ function App() {
   }, [users]);
   const disease1=disease[0];
   const disease2=disease[1];
-  useEffect(() => {
-    axios.get("http://localhost:3002/diseases").then((response) => {
-        const data=response.data;
-        const resultObject: string[][]=[]
-        data.forEach((val: any)=>{
-          if(val.disease_name==disease1 || val.disease_name==disease2){
-
-            resultObject.push([val.disease_name,val.tests,val.remedies])
-            console.log(val)
-          }
-        })
-        setResultState(resultObject)
-      })
-    }
-  , [] );
-
-  
-  
+   
 
   return (
     <Router>
@@ -103,13 +85,13 @@ function App() {
         <Route
           path="/Result1"
           element={
-            <Result result={resultState} disease={disease1} />
+            <Result disease={disease1} />
           }
         ></Route>
         <Route
           path="/Result2"
           element={
-            <Result result={resultState} disease={disease2} />
+            <Result  disease={disease2} />
           }
         ></Route>
         <Route

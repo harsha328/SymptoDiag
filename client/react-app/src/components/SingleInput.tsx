@@ -6,13 +6,14 @@ interface Props {
 }
 function SingleInput({ text,placeholder ,handleInput}: Props) {
   return (
-    <div className="input-group input-group-lg">
+    <div className="input-group input-group-lg d-flex justify-content-center">
       <span className="input-group-text" id="inputGroup-sizing-lg">
         {text}
       </span>
       <input
         type="text"
         className="form-control"
+        //style={{ width: '300px' }}
         aria-label="Sizing example input"
         placeholder={placeholder}
         aria-describedby="inputGroup-sizing-lg"

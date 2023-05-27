@@ -13,7 +13,11 @@ module.exports=(sequelize,DataTypes)=>{
             allowNull:false
         },
         remedies:{
-            type:DataTypes.STRING
+            type:DataTypes.TEXT
+        },
+        description:{
+            type:DataTypes.TEXT,
+            allowNull:false
         }
     })
     return Diseases;

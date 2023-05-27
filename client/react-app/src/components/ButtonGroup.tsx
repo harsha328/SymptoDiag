@@ -9,7 +9,7 @@ interface Props {
 function ButtonGroup({ text, link = "#" ,onSubmit}: Props) {
   return (
     <>
-      <div className="d-grid gap-2 col-2 mx-auto pt-1">
+      <div className="d-flex justify-content-center mt-3">
         <Link to={link} className="btn-link-white w-100">
           {
             <button className="btn btn-primary" type="submit" onClick={onSubmit}>

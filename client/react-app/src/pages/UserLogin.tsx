@@ -16,8 +16,9 @@ function UserLogin({ setState }: Props) {
   return (
     <>
       <NavBar />
+      
       <div className="container">
-        <h2 className="py-5"> Login Now! </h2>
+        <h2 className="py-5" > Login Now! </h2>
         <div className="container py-4">
         <SingleInput
           text="Enter your id"
@@ -37,12 +38,14 @@ function UserLogin({ setState }: Props) {
           }}
           
         />
-        <a className="py-5">Forgot password ?</a>
+        <a href="/ForgotPwd" className="py-5">Forgot password?</a>
+
         </div>
 
       </div>
+      <div className="button-container">
       <ButtonGroup
-        text="login"
+        text="LOGIN"
         link="../Details"
         onSubmit={() => {
             const id=uid(userName);
@@ -52,8 +55,8 @@ function UserLogin({ setState }: Props) {
         }}
       ></ButtonGroup>
       <ButtonGroup
-        text="back"
-        link=" "
+        text="BACK"
+        link="../HomePage "
         onSubmit={() => {
             const id=uid(userName);
             console.log(id)
@@ -61,6 +64,8 @@ function UserLogin({ setState }: Props) {
           setState(userId,userName);
         }}
       ></ButtonGroup>
+      </div>
+      
     </>
   );
 }

@@ -6,7 +6,10 @@ import UserLogin from "./pages/UserLogin";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Diseases from "./pages/Diseases";
-
+import ForgotPwd from "./pages/ForgotPwd";
+import Register from "./pages/Register";
+import HomePage from "./pages/HomePage";
+import About from "./pages/About";
 
 interface User {
   userid:string;
@@ -18,6 +21,9 @@ interface User {
 
 function App() {
   const [users, setUsers] = useState<User[]>([]);
+  const [disease,setDisease]=useState<string[]>([]);
+  
+
   const [userdata, setUserData] = useState<User>({
     userid:"are",
     username:"",
@@ -57,17 +63,16 @@ function App() {
     }
     console.log(users)
   }, [users]);
-
-  const resultState= {about:"About the diseasse in detail",
-  tests:"What are the tests possible",
-  remedies:"Remedies to reduce the disease"}
-  const disease1="DISEASE-1";
-  const disease2="DISEASE-2"
+  const disease1=disease[0];
+  const disease2=disease[1];
+  
+  
+  
 
   return (
     <Router>
       <Routes>
-        <Route path="/" element={
+        <Route path="/UserLogin" element={
           <UserLogin state={userdata}  setState={handleUserIdChange}/>
         
         }/>
@@ -81,13 +86,19 @@ function App() {
         <Route
           path="/Symptoms"
           element={
-            <Symptoms state={userdata} setState={handleSymptomsChange} />
+            <Symptoms state={userdata} setState={handleSymptomsChange} setDisease={setDisease} />
+          }
+        ></Route>
+         <Route
+          path="/Result1"
+          element={
+            <Result disease={disease1} />
           }
         ></Route>
         <Route
-          path="/Result"
+          path="/Result2"
           element={
-            <Result result={resultState}/>
+            <Result disease={disease2} />
           }
         ></Route>
         <Route
@@ -96,14 +107,30 @@ function App() {
          <Diseases disease1={disease1} disease2={disease2}/>
         }
         ></Route>
-        <Route
-        path="/ForgotPwd"
-        element={
-          <UserLogin state={userdata}  setState={handleUserIdChange}/>
-        }
+         <Route
+          path="/ForgotPwd"
+          element={
+            <ForgotPwd state={userdata} setState={handleAgeGenderChange} />
+          }
         ></Route>
-        
-
+        <Route
+          path="/Register"
+          element={
+            <Register state={userdata} setState={handleAgeGenderChange} />
+          }
+        ></Route>
+        <Route
+          path="/HomePage"
+          element={
+            <HomePage state={userdata} setState={handleAgeGenderChange} />
+          }
+        ></Route>
+        <Route
+          path="/About"
+          element={
+            <About state={userdata} setState={handleAgeGenderChange} />
+          }
+        ></Route>
       </Routes>
     </Router>
   );

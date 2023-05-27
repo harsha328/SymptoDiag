@@ -1,6 +1,4 @@
 import { useState } from "react";
-import NavBar from "../components/NavBar";
-import SingleInput from "../components/SingleInput";
 import ButtonGroup from "../components/ButtonGroup";
 import { uid } from "react-uid";
 interface Props {
@@ -8,41 +6,24 @@ interface Props {
   setState: (userid: any,username:any) => void;
 }
 
-function ForgotPwd({ setState }: Props) {
+function HomePage({ setState }: Props) {
   const [userId, setUserId] = useState("");
   const [userName,setUserName]=useState("");
 
 
   return (
     <>
-      <NavBar />
-      <div className="container">
-        <h2 className="py-5"> Forgot Password! </h2>
+     
+      <div className="container text-center">
+        <h1 className="py-5"> SYMPTODIAG </h1>
         <div className="container py-4">
-        <SingleInput
-          text="Enter your Mobile number"
-          
-          placeholder=" "
-          handleInput={(e) => {
-            setUserName(e.target.value);
-          }}
-        />
         </div>
-        <div className="container py-4">
-        <SingleInput
-          text="Send OTP"
-          placeholder="Enter OTP"
-          handleInput={(e) => {
-            setUserName(e.target.value);
-          }}
-          
-        />
+       
         
-        </div>
-
       </div>
+      <div className="container text-center">
       <ButtonGroup
-        text="SUBMIT"
+        text="LOGIN"
         link="../UserLogin"
         onSubmit={() => {
             const id=uid(userName);
@@ -52,8 +33,8 @@ function ForgotPwd({ setState }: Props) {
         }}
       ></ButtonGroup>
       <ButtonGroup
-        text="BACK"
-        link="../UserLogin"
+        text="REGISTER"
+        link="../Register"
         onSubmit={() => {
             const id=uid(userName);
             console.log(id)
@@ -61,8 +42,10 @@ function ForgotPwd({ setState }: Props) {
           setState(userId,userName);
         }}
       ></ButtonGroup>
+      <a href="/About" className="py-5">?About us</a>
+      </div>
     </>
   );
 }
 
-export default ForgotPwd;
+export default HomePage;

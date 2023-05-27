@@ -14,6 +14,7 @@ import axios from "axios";
 interface Props {
   state: any;
   setState: (e: any) => void;
+  setDisease:(e:any)=>void;
 }
 
 interface Disease {
@@ -23,10 +24,11 @@ interface Disease {
   remedies: string;
 }
 
-function Symptoms({ setState }: Props) {
+function Symptoms({ setState,setDisease }: Props) {
   const [listOfData, setListOfData] = useState<string[]>([]);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [symptomArr, setSymptomArr] = useState<string[][]>([[]]);
+  const [diseaseNames,setDiseaseNames]= useState<string[]>([]);
 
   useEffect(() => {
     axios.get<Disease[]>("http://localhost:3002/diseases").then((response) => {
@@ -37,10 +39,12 @@ function Symptoms({ setState }: Props) {
       }, [] as string[]);
       const uniqueSymptoms = [...new Set(allSymptoms)];
       let bigArr: string[][] = [];
+      let dn:string[]=[]
       allSymptomsArr.forEach((disease) => {
         bigArr.push(disease.symptoms.split(","));
+        dn.push(disease.disease_name)
       });
-      console.log(bigArr);
+      setDiseaseNames(dn)
       setSymptomArr(bigArr);
 
       setListOfData(uniqueSymptoms);
@@ -75,8 +79,14 @@ function Symptoms({ setState }: Props) {
 
   const options = listOfData;
   const handleContinue = () => {
-    setState(selectedOptions);
-    console.log(calculateRatios(symptomArr,selectedOptions))
+    setState(selectedOptions)
+    let ratios=calculateRatios(symptomArr,selectedOptions)
+    
+    const disease1=diseaseNames[ratios.indexOf(Math.max(...ratios))]
+    ratios[ratios.indexOf(Math.max(...ratios))]=0
+    const disease2=diseaseNames[ratios.indexOf(Math.max(...ratios))]
+    const topDiseases=[disease1,disease2]
+    setDisease(topDiseases)
   };
 
   return (
@@ -93,15 +103,16 @@ function Symptoms({ setState }: Props) {
           <h3 className="my-4">Selected Symptoms Are :</h3>
           <ListGroup items={selectedOptions}></ListGroup>
         </div>
+        
         <ButtonGroup
-          text="Check"
+          text="CHECK"
           link="../Diseases"
           onSubmit={() => {
             handleContinue();
           }}
         ></ButtonGroup>
         <ButtonGroup
-          text="back"
+          text="BACK"
           link="../Details"
           onSubmit={() => {
             () => {
@@ -110,6 +121,7 @@ function Symptoms({ setState }: Props) {
           }}
         ></ButtonGroup>
       </div>
+      
     </>
   );
 }

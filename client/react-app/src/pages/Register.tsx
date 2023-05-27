@@ -8,7 +8,7 @@ interface Props {
   setState: (userid: any,username:any) => void;
 }
 
-function ForgotPwd({ setState }: Props) {
+function Register({ setState }: Props) {
   const [userId, setUserId] = useState("");
   const [userName,setUserName]=useState("");
 
@@ -17,10 +17,10 @@ function ForgotPwd({ setState }: Props) {
     <>
       <NavBar />
       <div className="container">
-        <h2 className="py-5"> Forgot Password! </h2>
-        <div className="container py-4">
+        <h2 className="py-3">Register Here </h2>
+        <div className="container py-3">
         <SingleInput
-          text="Enter your Mobile number"
+          text="Name"
           
           placeholder=" "
           handleInput={(e) => {
@@ -28,10 +28,50 @@ function ForgotPwd({ setState }: Props) {
           }}
         />
         </div>
-        <div className="container py-4">
+        <div className="container py-3">
         <SingleInput
-          text="Send OTP"
-          placeholder="Enter OTP"
+          text="Email id"
+          placeholder=" "
+          handleInput={(e) => {
+            setUserName(e.target.value);
+          }}
+          
+        />
+         </div>
+        <div className="container py-3">
+        <SingleInput
+          text="Mobile no"
+          placeholder=" "
+          handleInput={(e) => {
+            setUserName(e.target.value);
+          }}
+          
+        />
+         </div>
+        <div className="container py-3">
+        <SingleInput
+          text="User Id"
+          placeholder=" "
+          handleInput={(e) => {
+            setUserName(e.target.value);
+          }}
+          
+        />
+         </div>
+        <div className="container py-3">
+        <SingleInput
+          text="Password"
+          placeholder=" "
+          handleInput={(e) => {
+            setUserName(e.target.value);
+          }}
+          
+        />
+         </div>
+        <div className="container py-3">
+        <SingleInput
+          text="Confirm password"
+          placeholder=" "
           handleInput={(e) => {
             setUserName(e.target.value);
           }}
@@ -53,7 +93,7 @@ function ForgotPwd({ setState }: Props) {
       ></ButtonGroup>
       <ButtonGroup
         text="BACK"
-        link="../UserLogin"
+        link="../HomePage"
         onSubmit={() => {
             const id=uid(userName);
             console.log(id)
@@ -65,4 +105,4 @@ function ForgotPwd({ setState }: Props) {
   );
 }
 
-export default ForgotPwd;
+export default Register;

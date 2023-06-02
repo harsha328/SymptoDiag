@@ -7,9 +7,12 @@ const db = require("./models");
 
 const userdetailsRouter=require('./routes/userdetails')
 const diseases=require('./routes/Diseases')
+const Test_description=require('./routes/Test_description')
+
 app.use("/userdetails",userdetailsRouter);
 
 app.use('/diseases',diseases);
+app.use('/TestDescription',Test_description);
 
 
 db.sequelize.sync().then(() => {

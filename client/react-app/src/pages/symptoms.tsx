@@ -89,9 +89,13 @@ function Symptoms({ setState,setDisease }: Props) {
     setDisease(topDiseases)
   };
 
+ 
+  
+
   return (
     <>
       <NavBar />
+      {}
       <div className="container">
         <div className="container my-5">
           <h3 className="pb-3">Enter Your Symptoms</h3>
@@ -106,13 +110,16 @@ function Symptoms({ setState,setDisease }: Props) {
         <ButtonGroup
           text="Check"
           link="../Diseases"
+          disabled={selectedOptions.length<=1}
           onSubmit={() => {
+            
             handleContinue();
           }}
         ></ButtonGroup>
         <ButtonGroup
           text="back"
           link="../Details"
+          disabled={false}
           onSubmit={() => {
             () => {
               setState([]);

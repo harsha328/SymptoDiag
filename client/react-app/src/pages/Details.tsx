@@ -2,7 +2,7 @@ import NavBar from "../components/NavBar";
 import SingleInput from "../components/SingleInput";
 import DoubleButton from "../components/DoubleButton";
 import ButtonGroup from "../components/ButtonGroup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface Props {
   state: any;
@@ -13,11 +13,20 @@ function Details({  setState }: Props) {
   const [radioState, setRadioState] = useState("male");
 
   const [inputState, setInputState] = useState("");
+
+  const handleAgeInput=()=>{
+    return !(parseInt(inputState)>=0 &&parseInt(inputState)<= 100)
+    
+  }
+  
+  
   
   return (
     <>
-      <NavBar />
-
+    
+      <NavBar
+      />
+    
       <div className="container">
         <div className="container ">
           <h2 className="py-5"> Welcome </h2>
@@ -40,14 +49,16 @@ function Details({  setState }: Props) {
           ></DoubleButton>
         </div>
         <ButtonGroup
-          text="CONTINUE"
+          text="Continue"
           link="../symptoms"
+          disabled={handleAgeInput()}
           onSubmit={() => {
             setState( inputState,  radioState );
           }}
         ></ButtonGroup>
         <ButtonGroup
-          text="BACK"
+          text="Back"
+          disabled={false}
           link="/"
           onSubmit={() => {
             setState('','');

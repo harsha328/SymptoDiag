@@ -2,7 +2,7 @@ import NavBar from "../components/NavBar";
 import SingleInput from "../components/SingleInput";
 import DoubleButton from "../components/DoubleButton";
 import ButtonGroup from "../components/ButtonGroup";
-import { useState } from "react";
+import { useState,useEffect} from "react";
 
 interface Props {
   state: any;
@@ -12,8 +12,15 @@ interface Props {
 function Details({  setState }: Props) {
   const [radioState, setRadioState] = useState("male");
 
-  const [inputState, setInputState] = useState("");
-  
+  const [inputState, setInputState] = useState("oo");
+  useEffect(()=>{
+    console.log(inputState)
+
+  },[inputState])
+
+  const checkAgeEntered=()=>{
+    return !(parseInt(inputState)>=1 && parseInt(inputState)<=1000)
+  }
   return (
     <>
       <NavBar />
@@ -42,6 +49,7 @@ function Details({  setState }: Props) {
         <ButtonGroup
           text="CONTINUE"
           link="../symptoms"
+          disabled={checkAgeEntered()}
           onSubmit={() => {
             setState( inputState,  radioState );
           }}
@@ -49,6 +57,7 @@ function Details({  setState }: Props) {
         <ButtonGroup
           text="BACK"
           link="/"
+          disabled={false}
           onSubmit={() => {
             setState('','');
           }}

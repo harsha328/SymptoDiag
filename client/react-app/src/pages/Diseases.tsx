@@ -1,7 +1,7 @@
 import NavBar from "../components/NavBar";
 import ResultCard from "../components/ResultCard";
 import ButtonGroup from "../components/ButtonGroup";
-import { useState,useEffect } from "react";
+import { useState } from "react";
 
 interface Props{
     disease1:string;
@@ -26,6 +26,7 @@ function Diseases({disease1,disease2}:Props)
     <ButtonGroup
           text="back"
           link="../symptoms"
+          disabled={false}
           onSubmit={() => {
             () => {
               useState([]);

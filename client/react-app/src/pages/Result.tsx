@@ -88,6 +88,7 @@ function Result({disease}:Props) {
       <ButtonGroup
           text="back"
           link="../Diseases"
+          disabled={false}
           onSubmit={() => {
             () => {
               useState([]);

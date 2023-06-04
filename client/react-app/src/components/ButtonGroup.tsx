@@ -3,16 +3,18 @@ import { Link } from "react-router-dom";
 interface Props {
   text: string;
   link: string;
+  disabled:boolean;
   onSubmit:()=>void;
 }
 
-function ButtonGroup({ text, link = "#" ,onSubmit}: Props) {
+function ButtonGroup({ text, link = "#" ,disabled=false,onSubmit}: Props) {
   return (
     <>
-      <div className="d-flex justify-content-center mt-3">
-        <Link to={link} className="btn-link-white w-100">
+      <div className="d-grid gap-2 col-2 mx-auto pt-1" aria-disabled={disabled}>
+        <Link to={link} className="btn-link-white w-100"  aria-disabled={disabled} onClick={disabled ? e => e.preventDefault() : undefined}>
           {
-            <button className="btn btn-primary" type="submit" onClick={onSubmit}>
+            <button className="btn btn-primary" type="submit" onClick={onSubmit} disabled={disabled}
+            aria-disabled={disabled}>
               {text}
             </button>
           }

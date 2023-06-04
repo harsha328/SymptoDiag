@@ -89,12 +89,17 @@ function Symptoms({ setState,setDisease }: Props) {
     setDisease(topDiseases)
   };
 
+ 
+  
+
   return (
     <>
       <NavBar />
+      {}
       <div className="container">
         <div className="container my-5">
           <h3 className="pb-3">Enter Your Symptoms</h3>
+          <h5 className="py-4">Please select minimum 3 symptoms </h5>
           <DropButton
             options={options}
             selectedOptions={selectedOptions}
@@ -103,17 +108,19 @@ function Symptoms({ setState,setDisease }: Props) {
           <h3 className="my-4">Selected Symptoms Are :</h3>
           <ListGroup items={selectedOptions}></ListGroup>
         </div>
-        
         <ButtonGroup
-          text="CHECK"
+          text="Check"
           link="../Diseases"
+          disabled={selectedOptions.length<=2}
           onSubmit={() => {
+            
             handleContinue();
           }}
         ></ButtonGroup>
         <ButtonGroup
-          text="BACK"
+          text="Back"
           link="../Details"
+          disabled={false}
           onSubmit={() => {
             () => {
               setState([]);
@@ -121,7 +128,6 @@ function Symptoms({ setState,setDisease }: Props) {
           }}
         ></ButtonGroup>
       </div>
-      
     </>
   );
 }

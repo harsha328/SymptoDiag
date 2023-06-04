@@ -82,8 +82,9 @@ function Register({ setState }: Props) {
 
       </div>
       <ButtonGroup
-        text="SUBMIT"
+        text="Submit"
         link="../UserLogin"
+        disabled={false}
         onSubmit={() => {
             const id=uid(userName);
             console.log(id)
@@ -92,8 +93,9 @@ function Register({ setState }: Props) {
         }}
       ></ButtonGroup>
       <ButtonGroup
-        text="BACK"
+        text="Back"
         link="../HomePage"
+        disabled={false}
         onSubmit={() => {
             const id=uid(userName);
             console.log(id)

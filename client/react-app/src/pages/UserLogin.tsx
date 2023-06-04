@@ -3,6 +3,7 @@ import NavBar from "../components/NavBar";
 import SingleInput from "../components/SingleInput";
 import ButtonGroup from "../components/ButtonGroup";
 import { uid } from "react-uid";
+import PasswordInput from "../components/PasswordInput";
 interface Props {
   state: any;
   setState: (userid: any,username:any) => void;
@@ -23,15 +24,15 @@ function UserLogin({ setState }: Props) {
         <SingleInput
           text="Enter your id"
           
-          placeholder="Ex. john..."
+          placeholder="Ex. john"
           handleInput={(e) => {
             setUserName(e.target.value);
           }}
         />
         </div>
         <div className="container py-4">
-        <SingleInput
-          text="Enter your password"
+        <PasswordInput
+          text="Password?"
           placeholder=" "
           handleInput={(e) => {
             setUserName(e.target.value);
@@ -45,8 +46,9 @@ function UserLogin({ setState }: Props) {
       </div>
       <div className="button-container">
       <ButtonGroup
-        text="LOGIN"
+        text="Login"
         link="../Details"
+        disabled={false}
         onSubmit={() => {
             const id=uid(userName);
             console.log(id)
@@ -55,8 +57,9 @@ function UserLogin({ setState }: Props) {
         }}
       ></ButtonGroup>
       <ButtonGroup
-        text="BACK"
+        text="Back"
         link="../HomePage "
+        disabled={false}
         onSubmit={() => {
             const id=uid(userName);
             console.log(id)

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import ButtonGroup from "../components/ButtonGroup";
 import { uid } from "react-uid";
+import { Modal } from "react-bootstrap";
+import ModalDisclaimer from "../components/Modal";
 interface Props {
   state: any;
   setState: (userid: any,username:any) => void;
@@ -13,6 +15,8 @@ function HomePage({ setState }: Props) {
 
   return (
     <>
+    <ModalDisclaimer/>
+
      
       <div className="container text-center">
         <h1 className="py-5"> SYMPTODIAG </h1>
@@ -23,8 +27,9 @@ function HomePage({ setState }: Props) {
       </div>
       <div className="container text-center">
       <ButtonGroup
-        text="LOGIN"
+        text="Login"
         link="../UserLogin"
+        disabled={false}
         onSubmit={() => {
             const id=uid(userName);
             console.log(id)
@@ -33,8 +38,9 @@ function HomePage({ setState }: Props) {
         }}
       ></ButtonGroup>
       <ButtonGroup
-        text="REGISTER"
+        text="Register"
         link="../Register"
+        disabled={false}
         onSubmit={() => {
             const id=uid(userName);
             console.log(id)

@@ -22,6 +22,7 @@ function DoubleButton({ text1, text2 , handleOptionClick}: Props) {
         value={text1}
         onChange={handleOptionClick}
         
+        
       />
       <label className="btn btn-outline-primary" htmlFor="btnradio1">
         {text1}

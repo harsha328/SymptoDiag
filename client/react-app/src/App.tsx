@@ -120,7 +120,7 @@ function App() {
           }
         ></Route>
         <Route
-          path="/HomePage"
+          path="/"
           element={
             <HomePage state={userdata} setState={handleAgeGenderChange} />
           }

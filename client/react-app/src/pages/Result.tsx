@@ -74,7 +74,7 @@ function Result({disease}:Props) {
             <Accordion.Body>{resultState[1]}</Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="2">
-            <Accordion.Header>test description</Accordion.Header>
+            <Accordion.Header>Test description</Accordion.Header>
             <Accordion.Body>{testDescription}</Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="3">

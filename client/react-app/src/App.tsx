@@ -65,6 +65,8 @@ function App() {
   }, [users]);
   const disease1=disease[0];
   const disease2=disease[1];
+
+ 
   
   
   

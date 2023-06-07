@@ -7,12 +7,14 @@ const db = require("./models");
 
 const userdetailsRouter=require('./routes/userdetails')
 const test_descriptionRouter=require('./routes/test_description')
-
 const diseases=require('./routes/Diseases')
-app.use("/userdetails",userdetailsRouter);
+const Credentials=require('./routes/Credentials')
 
+
+app.use("/userdetails",userdetailsRouter);
 app.use('/diseases',diseases);
-app.use('/test_description',test_descriptionRouter)
+app.use('/test_description',test_descriptionRouter);
+app.use('/Credentials',Credentials);
 
 
 db.sequelize.sync().then(() => {

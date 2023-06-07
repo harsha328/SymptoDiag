@@ -18,7 +18,7 @@ function Register({ setState }: Props) {
       <NavBar />
       <div className="container">
         <h2 className="py-3">Register Here </h2>
-        <div className="container py-3">
+        <div className="container py-1">
         <SingleInput
           text="Name"
           
@@ -29,14 +29,7 @@ function Register({ setState }: Props) {
         />
         </div>
         <div className="container py-3">
-        <SingleInput
-          text="Email id"
-          placeholder=" "
-          handleInput={(e) => {
-            setUserName(e.target.value);
-          }}
-          
-        />
+       
          </div>
         <div className="container py-3">
         <SingleInput
@@ -47,6 +40,7 @@ function Register({ setState }: Props) {
           }}
           
         />
+        
          </div>
         <div className="container py-3">
         <SingleInput
@@ -67,6 +61,7 @@ function Register({ setState }: Props) {
           }}
           
         />
+        
          </div>
         <div className="container py-3">
         <SingleInput
@@ -94,7 +89,7 @@ function Register({ setState }: Props) {
       ></ButtonGroup>
       <ButtonGroup
         text="Back"
-        link="../HomePage"
+        link="../"
         disabled={false}
         onSubmit={() => {
             const id=uid(userName);

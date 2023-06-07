@@ -38,7 +38,7 @@ function About({ setState }: Props) {
       </div>
       <ButtonGroup
         text="Back"
-        link="../HomePage"
+        link="../"
         disabled={false}
         onSubmit={() => {
             const id=uid(userName);

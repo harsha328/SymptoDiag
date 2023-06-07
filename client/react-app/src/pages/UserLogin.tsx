@@ -58,7 +58,7 @@ function UserLogin({ setState }: Props) {
       ></ButtonGroup>
       <ButtonGroup
         text="Back"
-        link="../HomePage "
+        link="../ "
         disabled={false}
         onSubmit={() => {
             const id=uid(userName);

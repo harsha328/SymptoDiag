@@ -23,14 +23,18 @@ function App() {
   const [users, setUsers] = useState<User[]>([]);
   const [disease,setDisease]=useState<string[]>([]);
   
+  
 
   const [userdata, setUserData] = useState<User>({
-    userid:"are",
+    userid:"",
     username:"",
     age: "",
     gender: "",
     symptoms: '',
   });
+
+
+
 
   const handleUserIdChange=(userid:string,username:string)=>{
     setUserData({...userdata,userid:userid,username:username})
@@ -66,7 +70,18 @@ function App() {
   const disease1=disease[0];
   const disease2=disease[1];
 
- 
+  useEffect(()=>{
+
+  })
+
+  /*const handleRegister = async () => {
+    try {
+      await axios.post("http://localhost:3002/credentials", credentials);
+      console.log("User data posted to credentials");
+    } catch (error) {
+      console.log("Error posting user data:", error);
+    }
+  };*/
   
   
   
@@ -75,7 +90,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/UserLogin" element={
-          <UserLogin state={userdata}  setState={handleUserIdChange}/>
+          <UserLogin/>
         
         }/>
         <Route
@@ -118,7 +133,7 @@ function App() {
         <Route
           path="/Register"
           element={
-            <Register state={userdata} setState={handleAgeGenderChange} />
+            <Register />
           }
         ></Route>
         <Route

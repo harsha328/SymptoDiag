@@ -1,18 +1,40 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NavBar from "../components/NavBar";
 import SingleInput from "../components/SingleInput";
 import ButtonGroup from "../components/ButtonGroup";
-import { uid } from "react-uid";
+import axios from "axios";
 import PasswordInput from "../components/PasswordInput";
-interface Props {
-  state: any;
-  setState: (userid: any,username:any) => void;
-}
 
-function UserLogin({ setState }: Props) {
+
+function UserLogin() {
   const [userId, setUserId] = useState("");
-  const [userName,setUserName]=useState("");
+  const [password,setPassword]=useState("");
+  const [idList,setIdList]=useState<string[][]>([[]]);
+  const [dbUserId,setDbUserId]=useState("");
+  const [dbPassword,setDbPassword]=useState("");
+  
+  useEffect(()=>{
+    axios.get("http://localhost:3002/Credentials").then((respose)=>{
+      const data=respose.data;
+      let idlistarr:string[][]=[]
+      data.forEach((val:any)=>{
+          idlistarr.push([val.user_id,val.password])
+        
+      });
+      setIdList(idlistarr);
+      console.log(idList)
+    })
 
+  },[])
+  const handleLogin=():boolean=>{
+    idList.forEach((val:any)=>{
+      if(userId==val[0] && password==val[1]){
+        return false
+      }
+      
+    })
+    return false
+  }
 
   return (
     <>
@@ -26,7 +48,7 @@ function UserLogin({ setState }: Props) {
           
           placeholder="Ex. john"
           handleInput={(e) => {
-            setUserName(e.target.value);
+            setUserId(e.target.value);
           }}
         />
         </div>
@@ -35,7 +57,7 @@ function UserLogin({ setState }: Props) {
           text="Password?"
           placeholder=" "
           handleInput={(e) => {
-            setUserName(e.target.value);
+            setPassword(e.target.value);
           }}
           
         />
@@ -48,12 +70,8 @@ function UserLogin({ setState }: Props) {
       <ButtonGroup
         text="Login"
         link="../Details"
-        disabled={false}
+        disabled={ handleLogin()}
         onSubmit={() => {
-            const id=uid(userName);
-            console.log(id)
-            setUserId(id)
-          setState(userId,userName);
         }}
       ></ButtonGroup>
       <ButtonGroup
@@ -61,10 +79,6 @@ function UserLogin({ setState }: Props) {
         link="../ "
         disabled={false}
         onSubmit={() => {
-            const id=uid(userName);
-            console.log(id)
-            setUserId(id)
-          setState(userId,userName);
         }}
       ></ButtonGroup>
       </div>
@@ -74,3 +88,8 @@ function UserLogin({ setState }: Props) {
 }
 
 export default UserLogin;
+  // if(val.user_id==userId && val.password==password){
+          //     console.log(userId,password)
+          //     setDbUserId(val.user_id);
+          //     setDbPassword(val.password);
+          //   }

@@ -10,12 +10,30 @@ router.get('/', (req, res) => {
     })
    
 });
+router.get('/auth',async(req,res)=>{
+ const authState=await Credentials.findOne({where:{user_id:req.body.user_id,password:req.body.password}})
+ if(authState==null){
+  res.json({error:true});
+  console.log(req.body,"error")
+ }
+ else{
+  res.json({error:false});
+  console.log(req.body)
+ }
+})
 
 // POST a new credential
 router.post('/', async(req, res) => {
   const post = req.body;
-  await Credentials.create(post)
-  res.json(post);
+  const authState=await Credentials.findOne({where:{user_id:post.user_id}})
+  if(authState==null){
+    await Credentials.create(post)
+    res.json({error:false});
+
+  }
+  else{
+    res.json({error:true})
+  }
     
 });
 

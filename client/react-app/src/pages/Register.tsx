@@ -1,17 +1,53 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NavBar from "../components/NavBar";
 import SingleInput from "../components/SingleInput";
+import PasswordInput from "../components/PasswordInput";
 import ButtonGroup from "../components/ButtonGroup";
-import { uid } from "react-uid";
-interface Props {
-  state: any;
-  setState: (userid: any,username:any) => void;
+import axios from "axios";
+interface Credetials {
+  name: string;
+  mobile: string;
+  user_id: string;
+  password: string;
+  confirm_pwd: string;
 }
 
-function Register({ setState }: Props) {
+function Register() {
+  const [name, setName] = useState("");
+  const [mobile, setMobile] = useState("");
   const [userId, setUserId] = useState("");
-  const [userName,setUserName]=useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [credState,setCredState]=useState(false);
+  const [credentials, setCredetials] = useState<Credetials>({
+    name: "",
+    mobile: "",
+    user_id: "",
+    password: "",
+    confirm_pwd: "",
+  });
 
+  const handleRegister = () => {
+    setCredetials({
+      name: name,
+      mobile: mobile,
+      user_id: userId,
+      password: password,
+      confirm_pwd: confirmPassword,
+    });
+  };
+  useEffect(()=>{
+    console.log(credentials)
+    if(userId.length>0){
+
+      axios.post('http://localhost:3002/Credentials',credentials).then((response)=>{
+        console.log(response.data)
+        if(!response.data.error){
+          setCredState(true)
+        }
+      })
+    }
+  },[credentials])
 
   return (
     <>
@@ -19,72 +55,60 @@ function Register({ setState }: Props) {
       <div className="container">
         <h2 className="py-3">Register Here </h2>
         <div className="container py-1">
-        <SingleInput
-          text="Name"
-          
-          placeholder=" "
-          handleInput={(e) => {
-            setUserName(e.target.value);
-          }}
-        />
+          <SingleInput
+            text="Name"
+            placeholder=" "
+            handleInput={(e) => {
+              setName(e.target.value);
+            }}
+          />
+        </div>
+        <div className="container py-3"></div>
+        <div className="container py-3">
+          <SingleInput
+            text="Mobile no"
+            placeholder=" "
+            handleInput={(e) => {
+              setMobile(e.target.value);
+            }}
+          />
         </div>
         <div className="container py-3">
-       
-         </div>
-        <div className="container py-3">
-        <SingleInput
-          text="Mobile no"
-          placeholder=" "
-          handleInput={(e) => {
-            setUserName(e.target.value);
-          }}
-          
-        />
-        
-         </div>
-        <div className="container py-3">
-        <SingleInput
-          text="User Id"
-          placeholder=" "
-          handleInput={(e) => {
-            setUserName(e.target.value);
-          }}
-          
-        />
-         </div>
-        <div className="container py-3">
-        <SingleInput
-          text="Password"
-          placeholder=" "
-          handleInput={(e) => {
-            setUserName(e.target.value);
-          }}
-          
-        />
-        
-         </div>
-        <div className="container py-3">
-        <SingleInput
-          text="Confirm password"
-          placeholder=" "
-          handleInput={(e) => {
-            setUserName(e.target.value);
-          }}
-          
-        />
-        
+          <SingleInput
+            text="User Id"
+            placeholder=" "
+            handleInput={(e) => {
+              setUserId(e.target.value);
+            }}
+          />
         </div>
-
+        <div className="container py-3">
+          <PasswordInput
+            text="Password"
+            placeholder=" "
+            handleInput={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
+        </div>
+        <div className="container py-3">
+          <PasswordInput
+            text="Confirm password"
+            placeholder=" "
+            handleInput={(e) => {
+              setConfirmPassword(e.target.value);
+              
+            }}
+          />
+        </div>
       </div>
       <ButtonGroup
         text="Submit"
-        link="../UserLogin"
-        disabled={false}
+        link="../Register"
+        disabled={password!=confirmPassword}
         onSubmit={() => {
-            const id=uid(userName);
-            console.log(id)
-            setUserId(id)
-          setState(userId,userName);
+          handleRegister();
+          
         }}
       ></ButtonGroup>
       <ButtonGroup
@@ -92,10 +116,7 @@ function Register({ setState }: Props) {
         link="../"
         disabled={false}
         onSubmit={() => {
-            const id=uid(userName);
-            console.log(id)
-            setUserId(id)
-          setState(userId,userName);
+          
         }}
       ></ButtonGroup>
     </>

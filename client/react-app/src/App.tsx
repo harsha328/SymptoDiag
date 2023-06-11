@@ -10,6 +10,7 @@ import ForgotPwd from "./pages/ForgotPwd";
 import Register from "./pages/Register";
 import HomePage from "./pages/HomePage";
 import About from "./pages/About";
+import RegisterPage from "./pages/RegisterPage";
 
 interface User {
   userid:string;
@@ -18,6 +19,8 @@ interface User {
   gender: string;
   symptoms: string;
 }
+
+
 
 function App() {
   const [users, setUsers] = useState<User[]>([]);
@@ -31,6 +34,7 @@ function App() {
     gender: "",
     symptoms: '',
   });
+  
 
   const handleUserIdChange=(userid:string,username:string)=>{
     setUserData({...userdata,userid:userid,username:username})
@@ -69,13 +73,12 @@ function App() {
  
   
   
-  
 
   return (
     <Router>
       <Routes>
         <Route path="/UserLogin" element={
-          <UserLogin state={userdata}  setState={handleUserIdChange}/>
+          <UserLogin />
         
         }/>
         <Route
@@ -118,9 +121,16 @@ function App() {
         <Route
           path="/Register"
           element={
-            <Register state={userdata} setState={handleAgeGenderChange} />
+            <Register />
           }
         ></Route>
+                <Route
+          path="/RegisterPage"
+          element={
+            <RegisterPage />
+          }
+        ></Route>
+
         <Route
           path="/"
           element={
@@ -133,6 +143,7 @@ function App() {
             <About state={userdata} setState={handleAgeGenderChange} />
           }
         ></Route>
+
       </Routes>
     </Router>
   );

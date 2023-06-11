@@ -10,54 +10,49 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 interface Credentials {
-    name: string;
-    mobile: string;
+   
     user_id: string;
     password: string;
-    confirm_pwd: string;
+    
   }
 
-function RegisterPage() {
+function LoginPage() {
   const { Formik } = formik;
-  const phoneRegExp = /^\d{10}$/;
   const navigate = useNavigate();
    const initValues:Credentials={
     
-    name: "",
     user_id: "",
-    mobile: "",
     password: "",
-    confirm_pwd: "",
 
    }
 
   const handleSubmit=async(values:Credentials)=>{
+    console.log(values)
     axios
-    .post("http://localhost:3002/Credentials", values)
+    .post("http://localhost:3002/Credentials/auth",values)
     .then((response) => {
       console.log(response.data);
 
       if(!response.data.error){
-        navigate('../UserLogin')
+        navigate('../Details')
       }
       console.log(response.data.error);
     });
   }
   const schema = yup.object().shape({
-    name: yup.string().required(),
     user_id: yup.string().required(),
-    mobile: yup
-      .string()
-      .matches(phoneRegExp, "Phone number is not valid")
-      .required(),
+   
     password: yup.string().required(),
-    confirm_pwd: yup.string().required(),
   });
 
   return (
     <>
       <NavBar />
       <div className="container">
+      <Row className="mb-3 text-center">
+
+      <h2 className="py-5 " > Login Now! </h2>
+      </Row>
         <Formik
           validationSchema={schema}
           onSubmit={(values:Credentials)=>{
@@ -68,57 +63,14 @@ function RegisterPage() {
         >
           {({ handleSubmit, handleChange, values, touched, errors }) => (
             <Form noValidate onSubmit={handleSubmit} className="mx-auto">
-              <Row className="mb-3 justify-content-between">
-                <Form.Group
-                  as={Col}
-                  md="4"
-                  controlId="validationFormik101"
-                  className="position-relative ms-5"
-                >
-                  <Form.Label>Name</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="name"
-                    placeholder="name"
-                    value={values.name}
-                    onChange={handleChange}
-                    isValid={!!errors.name}
-                  />
-                  <Form.Control.Feedback type="invalid" tooltip>
-                    {errors.name}
-                  </Form.Control.Feedback>{" "}
-                </Form.Group>
-
-                <Form.Group
-                  as={Col}
-                  md="4"
-                  controlId="validationFormik103"
-                  className="position-relative me-5"
-                >
-                  <Form.Label>mobile</Form.Label>
-                  <Form.Control
-                    type="number"
-                    placeholder="mobile"
-                    name="mobile"
-                    value={values.mobile}
-                    onChange={handleChange}
-                    isInvalid={!!errors.mobile}
-                  />
-
-                  <Form.Control.Feedback type="invalid" tooltip>
-                    {errors.mobile}
-                  </Form.Control.Feedback>
-                </Form.Group>
-
-                
-              </Row>
-              <Row className="mb-3">
+              
+              <Row className="mb-3 justify-content-center">
               
                 <Form.Group
                   as={Col}
                   md="4"
                   controlId="validationFormikUsername2"
-                  className="position-relative ms-5"
+                  className="position-relative "
 
                 >
                   <Form.Label>User Id</Form.Label>
@@ -140,12 +92,12 @@ function RegisterPage() {
                 </Form.Group>
               </Row>
 
-              <Row className="mb-3 justify-content-between ">
+              <Row className="mb-3 justify-content-center ">
                 <Form.Group
                   as={Col}
                   md="4"
                   controlId="validationFormik104"
-                  className="position-relative ms-5"
+                  className="position-relative "
                 >
                   <Form.Label>password</Form.Label>
                   <Form.Control
@@ -160,30 +112,11 @@ function RegisterPage() {
                     {errors.password}
                   </Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group
-                  as={Col}
-                  md="4"
-                  controlId="validationFormik105"
-                  className="position-relative me-5"
-                >
-                  <Form.Label>confirm Password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    placeholder="confirm Password"
-                    name="confirm_pwd"
-                    value={values.confirm_pwd}
-                    onChange={handleChange}
-                    isInvalid={!!errors.confirm_pwd}
-                  />
-
-                  <Form.Control.Feedback type="invalid" tooltip>
-                    {errors.confirm_pwd}
-                  </Form.Control.Feedback>
-                </Form.Group>
+                
               </Row>
-              <Row className="mb-3">
+              <Row className="mb-3 mt-5 justify-content-center">
 
-              <Button type="submit" className="w-25 mx-auto">Submit form</Button>
+              <Button type="submit" className="w-25 ">Submit </Button>
               </Row>
 
             </Form>
@@ -194,4 +127,4 @@ function RegisterPage() {
   );
 }
 
-export default RegisterPage;
+export default LoginPage;

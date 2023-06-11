@@ -3,6 +3,7 @@ import NavBar from "../components/NavBar";
 import SingleInput from "../components/SingleInput";
 import PasswordInput from "../components/PasswordInput";
 import ButtonGroup from "../components/ButtonGroup";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 interface Credetials {
   name: string;
@@ -13,12 +14,14 @@ interface Credetials {
 }
 
 function Register() {
+  const navigate = useNavigate();
+
   const [name, setName] = useState("");
   const [mobile, setMobile] = useState("");
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [credState,setCredState]=useState(false);
+  const [credState, setCredState] = useState(true);
   const [credentials, setCredetials] = useState<Credetials>({
     name: "",
     mobile: "",
@@ -27,7 +30,7 @@ function Register() {
     confirm_pwd: "",
   });
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
     setCredetials({
       name: name,
       mobile: mobile,
@@ -35,19 +38,27 @@ function Register() {
       password: password,
       confirm_pwd: confirmPassword,
     });
-  };
-  useEffect(()=>{
-    console.log(credentials)
-    if(userId.length>0){
 
-      axios.post('http://localhost:3002/Credentials',credentials).then((response)=>{
-        console.log(response.data)
-        if(!response.data.error){
-          setCredState(true)
-        }
-      })
+    
+  };
+
+  useEffect(() => {
+    if (userId.length > 0) {
+       axios
+        .post("http://localhost:3002/Credentials", credentials)
+        .then((response) => {
+          console.log(response.data);
+
+          
+          setCredState(response.data.error);
+          console.log(response.data.error);
+        });
     }
-  },[credentials])
+    // if(!credState){
+    //   navigate('../UserLogin')
+    // }
+  },[userId]);
+
 
   return (
     <>
@@ -97,27 +108,24 @@ function Register() {
             placeholder=" "
             handleInput={(e) => {
               setConfirmPassword(e.target.value);
-              
             }}
           />
         </div>
       </div>
       <ButtonGroup
         text="Submit"
-        link="../Register"
-        disabled={password!=confirmPassword}
+        link={credState ? "../Register" : "../UserLogin"}
+        disabled={password != confirmPassword}
         onSubmit={() => {
           handleRegister();
-          
+          console.log(credState);
         }}
       ></ButtonGroup>
       <ButtonGroup
         text="Back"
         link="../"
         disabled={false}
-        onSubmit={() => {
-          
-        }}
+        onSubmit={() => {}}
       ></ButtonGroup>
     </>
   );

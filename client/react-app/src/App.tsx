@@ -11,7 +11,7 @@ import Register from "./pages/Register";
 import HomePage from "./pages/HomePage";
 import About from "./pages/About";
 import RegisterPage from "./pages/RegisterPage";
-
+import LoginPage from "./pages/LoginPage";
 interface User {
   userid:string;
   username:string;
@@ -130,7 +130,12 @@ function App() {
             <RegisterPage />
           }
         ></Route>
-
+       <Route
+          path="/LoginPage"
+          element={
+            <LoginPage />
+          }
+        ></Route>
         <Route
           path="/"
           element={

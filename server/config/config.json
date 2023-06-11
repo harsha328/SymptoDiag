@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "root",
-    "password": "Harsha@3",
-    "database": "symptodiag_schema",
+    "password": "Rojin123",
+    "database": "symptodiag",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
